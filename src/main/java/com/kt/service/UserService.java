@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.common.CustomException;
 import com.kt.common.ErrorCode;
+import com.kt.common.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserCreateRequest;
 import com.kt.repository.UserRepository;
@@ -49,13 +50,8 @@ public class UserService {
 		var user = userRepository.findById(id)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
-		if(!user.getPassword().equals(oldPassword)) {
-			throw new CustomException(ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
-		}
-
-		if(oldPassword.equals(password)) {
-			throw new CustomException(ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
-		}
+		Preconditions.validate(!user.getPassword().equals(oldPassword), ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
+		Preconditions.validate(!oldPassword.equals(password), ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
 
 		user.changePassword(password);
 	}
