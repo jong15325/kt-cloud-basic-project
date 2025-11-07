@@ -43,7 +43,7 @@ public class AdminUserController {
 
 	}
 	// 유저 상세 조회
-
+	//testtesttest jira test
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public User detail(@PathVariable Long id) {
