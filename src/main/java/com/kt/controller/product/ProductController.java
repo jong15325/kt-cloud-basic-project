@@ -1,6 +1,4 @@
-package com.kt.controller;
-
-import java.util.List;
+package com.kt.controller.product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.domain.product.Product;
-import com.kt.dto.ProductCreateReqeust;
-import com.kt.dto.ProductUpdateReqeust;
-import com.kt.dto.UserCreateRequest;
-import com.kt.dto.UserUpdatePasswordRequest;
+import com.kt.dto.product.ProductCreateReqeust;
+import com.kt.dto.product.ProductUpdateReqeust;
 import com.kt.service.ProductService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

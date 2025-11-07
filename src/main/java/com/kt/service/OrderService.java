@@ -1,7 +1,6 @@
 package com.kt.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +13,9 @@ import com.kt.domain.order.Order;
 import com.kt.domain.order.OrderStatus;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.domain.product.Product;
-import com.kt.domain.user.User;
-import com.kt.dto.OrderCreateRequest;
-import com.kt.dto.OrderProductReqeust;
-import com.kt.dto.OrderUpdateRequest;
+import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderProductReqeust;
+import com.kt.dto.order.OrderUpdateRequest;
 import com.kt.repository.OrderRepository;
 import com.kt.repository.ProductRepository;
 import com.kt.repository.UserRepository;

@@ -1,9 +1,8 @@
-package com.kt.dto;
+package com.kt.dto.order;
 
 import com.kt.domain.order.OrderStatus;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 /**
  *packageName    : com.kt.dto

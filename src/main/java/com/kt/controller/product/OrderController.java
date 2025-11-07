@@ -1,4 +1,4 @@
-package com.kt.controller;
+package com.kt.controller.product;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kt.dto.OrderCreateRequest;
-import com.kt.dto.OrderUpdateRequest;
+import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderUpdateRequest;
 import com.kt.service.OrderService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

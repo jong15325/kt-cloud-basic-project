@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.domain.product.Product;
 import com.kt.domain.product.ProductStatus;
-import com.kt.dto.ProductCreateReqeust;
-import com.kt.dto.ProductUpdateReqeust;
+import com.kt.dto.product.ProductCreateReqeust;
+import com.kt.dto.product.ProductUpdateReqeust;
 import com.kt.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -1,14 +1,12 @@
-package com.kt.dto;
+package com.kt.dto.product;
 
-import com.kt.domain.product.ProductStatus;
-
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 /**
  *packageName    : com.kt.dto
- * fileName       : ProductUpdateStatusReqeust
+ * fileName       : ProductCreateReqeust
  * author         : howee
  * date           : 2025-11-06
  * description    :
@@ -17,10 +15,15 @@ import jakarta.validation.constraints.Pattern;
  * -----------------------------------------------------------
  * 2025-11-06        howee       최초 생성
  */
-public record ProductUpdateReqeust (
+public record ProductCreateReqeust (
+	@NotBlank
 	String name,
+	String description,
+	@NotNull // blank는 문자열에만 해당됨
+	@Min(value = 0)
 	long price,
-	long stockQuantity,
-	ProductStatus status
+	@NotNull
+	@Min(value = 0)
+	long stockQuantity
 ){
 }

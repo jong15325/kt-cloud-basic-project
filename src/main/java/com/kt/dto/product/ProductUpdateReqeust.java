@@ -1,11 +1,10 @@
-package com.kt.dto;
+package com.kt.dto.product;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import com.kt.domain.product.ProductStatus;
 
 /**
  *packageName    : com.kt.dto
- * fileName       : OrderProductReqeust
+ * fileName       : ProductUpdateStatusReqeust
  * author         : howee
  * date           : 2025-11-06
  * description    :
@@ -14,12 +13,10 @@ import jakarta.validation.constraints.NotNull;
  * -----------------------------------------------------------
  * 2025-11-06        howee       최초 생성
  */
-public record OrderProductReqeust(
-	@NotNull
-	Long productId,
-
-	@NotNull
-	@Min(1)
-	Long quantity
-) {
+public record ProductUpdateReqeust (
+	String name,
+	long price,
+	long stockQuantity,
+	ProductStatus status
+){
 }

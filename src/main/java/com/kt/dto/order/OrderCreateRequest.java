@@ -1,17 +1,10 @@
-package com.kt.dto;
+package com.kt.dto.order;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import com.kt.domain.order.OrderStatus;
-import com.kt.domain.orderproduct.OrderProduct;
-
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 /**
  *packageName    : com.kt.dto
