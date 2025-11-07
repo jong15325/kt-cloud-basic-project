@@ -12,12 +12,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 // 1. domain과 entity를 분리해야
 // 2. 굳이? 같이쓰지뭐
 @Getter
 @Entity
+@NoArgsConstructor // JPA에서는 생성자 파라미터를 알 수 없고 어떤 파라미터를 받는지 모름
+// 결국엔 Product product = new Product() 이런식으로 호출하기 때문에 기본생성자가 필요
+@Table(name="member")
 public class User extends BaseEntity {
 	private String loginId;
 	private String password;
