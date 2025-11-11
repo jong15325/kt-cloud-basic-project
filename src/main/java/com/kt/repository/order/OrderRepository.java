@@ -1,9 +1,8 @@
-package com.kt.repository;
+package com.kt.repository.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kt.domain.order.Order;
-import com.kt.domain.product.Product;
 
 /**
  *packageName    : com.kt.repository
