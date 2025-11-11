@@ -95,6 +95,8 @@ public class ProductController extends SwaggerAssistance {
 		return ApiResult.ok(productService.detail(id));
 	}
 
+	//TODO: restful하지 않음
+	//TODO: 상태 변경 각각 엔드포인트로 분리
 	//상태변경
 	@PutMapping("/{id}/update-status")
 	@ResponseStatus(HttpStatus.OK)

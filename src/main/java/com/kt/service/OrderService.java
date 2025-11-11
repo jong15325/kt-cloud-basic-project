@@ -1,6 +1,7 @@
 package com.kt.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.kt.dto.order.OrderCreateRequest;
 import com.kt.dto.order.OrderProductReqeust;
 import com.kt.dto.order.OrderUpdateRequest;
 import com.kt.repository.order.OrderRepository;
+import com.kt.repository.orderproduct.OrderProductRepository;
 import com.kt.repository.product.ProductRepository;
 import com.kt.repository.user.UserRepository;
 
@@ -44,6 +46,7 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	private final UserRepository userRepository;
 	private final ProductRepository productRepository;
+	private final OrderProductRepository orderProductRepository;
 
 	public void create(OrderCreateRequest request) {
 		var user = userRepository.findById(request.receiverId())
@@ -65,16 +68,6 @@ public class OrderService {
 			productMap.put(product.getId(), product);
 		}
 
-		List<OrderProduct> opEntity = request.orderProducts().stream()
-			.map(req -> {
-				Product product = productMap.get(req.productId());
-
-				return new OrderProduct(req.quantity(), null, product);
-
-			})
-			.toList();
-		System.out.println(Arrays.toString(opEntity.toArray()));
-
 		var newOrder = new Order(
 			user.getName(),
 			request.receiverAddress(),
@@ -82,12 +75,29 @@ public class OrderService {
 			OrderStatus.PENDING,
 			null,
 			user,
-			opEntity,
 			LocalDateTime.now(),
 			LocalDateTime.now()
 		);
 
-		orderRepository.save(newOrder);
+		var order = orderRepository.save(newOrder);/*
+		var orderProduct = orderProductRepository.save(new OrderProduct(order, ));*/
+
+		//TODO: 추후 bulk로 처리해도 될 듯(생각 해봐야 할 것은 bulk로 처리 시 영속성 문제와 성능 이슈 없을지 고려)
+		/*for (var product : products) {
+			orderProductRepository.save(new OrderProduct(order, product, product.getStock()));
+		}*/
+
+		List<OrderProduct> orderProducts = request.orderProducts().stream()
+			.map(req -> {
+				Product product = productMap.get(req.productId());
+
+				return new OrderProduct(order, product, req.quantity());
+
+			})
+			.toList();
+
+		// 이런게 있네~
+		orderProductRepository.saveAll(orderProducts);
 
 	}
 

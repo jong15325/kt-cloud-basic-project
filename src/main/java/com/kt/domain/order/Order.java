@@ -42,7 +42,7 @@ public class Order extends BaseEntity {
 	private User user;
 
 	@OneToMany(mappedBy = "order")
-	private List<OrderProduct> orderProducts = new ArrayList<>();
+	private List<OrderProduct> orderProducts;
 
 	//하나의 오더는 여러개의 상품을 가질수있음
 	// 1:N
@@ -50,14 +50,14 @@ public class Order extends BaseEntity {
 	// 1:N
 
 	public Order(String receiverName, String receiverAddress, String receiverMobile, OrderStatus status,
-			LocalDateTime deliveredAt, User user, List<OrderProduct> orderProducts, LocalDateTime createdAt, LocalDateTime updatedAt) {
+			LocalDateTime deliveredAt, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.receiverName = receiverName;
 		this.receiverAddress = receiverAddress;
 		this.receiverMobile = receiverMobile;
 		this.status = status;
 		this.deliveredAt = deliveredAt;
 		this.user = user;
-		this.orderProducts = orderProducts;
+		this.orderProducts = new ArrayList<>();
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}

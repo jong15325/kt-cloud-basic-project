@@ -1,5 +1,7 @@
 package com.kt.domain.orderproduct;
 
+import java.time.LocalDateTime;
+
 import com.kt.common.BaseEntity;
 import com.kt.domain.order.Order;
 import com.kt.domain.product.Product;
@@ -9,9 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class OrderProduct extends BaseEntity {
 	private Long quantity;
 
@@ -24,10 +28,11 @@ public class OrderProduct extends BaseEntity {
 
 	// 주문생성되면 오더프로덕트도 같이 생성
 
-	public OrderProduct(Long quantity, Order order, Product product) {
-		this.quantity = quantity;
+	public OrderProduct(Order order, Product product, Long quantity) {
 		this.order = order;
 		this.product = product;
+		this.quantity = quantity;
+		this.createdAt = LocalDateTime.now();
 	}
 
 }

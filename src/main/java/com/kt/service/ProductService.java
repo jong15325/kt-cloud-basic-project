@@ -112,6 +112,9 @@ public class ProductService {
 		var product = productRepository.findById(productId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
+
+		//TODO :
+		// 강사님 tip : 서비스에서 할건지, 도메인에서 할건지, DB에서 할건지 책임을 정하는데 지금의 나라면 도메인에서 할 것
 		var productStock = product.getStock();
 
 		if (productStock < quantity) {
