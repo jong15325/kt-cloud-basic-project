@@ -1,4 +1,4 @@
-package com.kt.controller.product;
+package com.kt.controller.order;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,8 +16,6 @@ import com.kt.dto.order.OrderCreateRequest;
 import com.kt.dto.order.OrderUpdateRequest;
 import com.kt.service.OrderService;
 
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

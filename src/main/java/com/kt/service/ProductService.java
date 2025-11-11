@@ -13,7 +13,7 @@ import com.kt.domain.product.Product;
 import com.kt.domain.product.ProductStatus;
 import com.kt.dto.product.ProductCreateReqeust;
 import com.kt.dto.product.ProductUpdateReqeust;
-import com.kt.repository.ProductRepository;
+import com.kt.repository.product.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 

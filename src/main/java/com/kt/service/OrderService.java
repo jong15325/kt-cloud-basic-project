@@ -18,9 +18,9 @@ import com.kt.domain.product.Product;
 import com.kt.dto.order.OrderCreateRequest;
 import com.kt.dto.order.OrderProductReqeust;
 import com.kt.dto.order.OrderUpdateRequest;
-import com.kt.repository.OrderRepository;
-import com.kt.repository.ProductRepository;
-import com.kt.repository.UserRepository;
+import com.kt.repository.order.OrderRepository;
+import com.kt.repository.product.ProductRepository;
+import com.kt.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
