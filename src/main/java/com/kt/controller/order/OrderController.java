@@ -1,6 +1,7 @@
 package com.kt.controller.order;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.kt.common.ApiResult;
 import com.kt.common.SwaggerAssistance;
 import com.kt.dto.order.OrderCreateRequest;
 import com.kt.dto.order.OrderUpdateRequest;
+import com.kt.security.CurrentUser;
 import com.kt.service.OrderService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,8 +47,11 @@ public class OrderController extends SwaggerAssistance {
 	// 주문생성완료재고차감
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ApiResult<Void> create(@Valid @RequestBody OrderCreateRequest reqeust) {
-		orderService.create(reqeust);
+	public ApiResult<Void> create(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@Valid @RequestBody OrderCreateRequest reqeust
+	) {
+		orderService.create(currentUser.getId(), reqeust);
 
 		return ApiResult.ok();
 	}

@@ -34,12 +34,14 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private LocalDate birthday;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<>();
 
 
-
+	// 일반 사용자 생성
 	public User(String loginId, String password, String name, String email, String mobile, Gender gender,
 		LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.loginId = loginId;
@@ -51,6 +53,23 @@ public class User extends BaseEntity {
 		this.birthday = birthday;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.role = Role.USER;
+	}
+
+	//팩토리 메서드 패턴
+	public static User admin(String loginId, String password, String name, String email, String mobile, Gender gender,
+		LocalDate birthday, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		return new User(
+			loginId,
+			password,
+			name,
+			email,
+			mobile,
+			gender,
+			birthday,
+			createdAt,
+			updatedAt
+		);
 	}
 
 	public void changePassword(String password) {

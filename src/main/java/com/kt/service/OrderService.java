@@ -48,8 +48,8 @@ public class OrderService {
 	private final ProductRepository productRepository;
 	private final OrderProductRepository orderProductRepository;
 
-	public void create(OrderCreateRequest request) {
-		var user = userRepository.findById(request.receiverId())
+	public void create(Long userId, OrderCreateRequest request) {
+		var user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
 		System.out.println(request.orderProducts().size());
