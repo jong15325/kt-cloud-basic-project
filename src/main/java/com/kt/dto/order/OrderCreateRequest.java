@@ -19,6 +19,8 @@ import jakarta.validation.constraints.NotNull;
  */
 public record OrderCreateRequest (
 	@NotNull
+	Long userId,
+	@NotNull
 	Long receiverId,
 	@NotBlank
 	String receiverAddress,
