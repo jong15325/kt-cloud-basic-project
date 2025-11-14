@@ -68,7 +68,7 @@ public class ProductController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
-	//삭제
+	// 하드 삭제
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<Void> delete(@PathVariable Long id) {
@@ -98,37 +98,67 @@ public class ProductController extends SwaggerAssistance {
 	//TODO: restful하지 않음
 	//TODO: 상태 변경 각각 엔드포인트로 분리
 	//상태변경
-	@PutMapping("/{id}/update-status")
+	@PutMapping("/{id}/active")
 	@ResponseStatus(HttpStatus.OK)
-	public ApiResult<Void> updateStatus(
-		@PathVariable Long id,
-		@RequestBody @Valid ProductUpdateReqeust request
+	public ApiResult<Void> active(
+		@PathVariable Long id
 	) {
-		productService.changeStatus(id, request.status());
+
+		productService.active(id);
 
 		return ApiResult.ok();
 	}
 
-	//재고수량변경
-	//이렇게하면 restful하지 않음
-	/*@PutMapping("/{id}/adjus-stock-quantity")
+	@PutMapping("/{id}/in-active")
 	@ResponseStatus(HttpStatus.OK)
-	public void adjusStockQuantity(
-		@PathVariable Long id,
-		@RequestBody @Valid ProductUpdateReqeust request,
-		@RequestBody String option
+	public ApiResult<Void> inActive(
+		@PathVariable Long id
 	) {
-		productService.adjusStockQuantity(id, request.stockQuantity(), option);
-	}*/
+
+		productService.inActive(id);
+
+		return ApiResult.ok();
+	}
+
+	@PutMapping("/{id}/sold-out")
+	@ResponseStatus(HttpStatus.OK)
+	public ApiResult<Void> soldOut(
+		@PathVariable Long id
+	) {
+		productService.soldOut(id);
+
+		return ApiResult.ok();
+	}
+
+	// 소프트 삭제
+	@PutMapping("/{id}/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public ApiResult<Void> softDelete(
+		@PathVariable Long id
+	) {
+		productService.softDelete(id);
+
+		return ApiResult.ok();
+	}
+
+	@PutMapping("/{id}/restore")
+	@ResponseStatus(HttpStatus.OK)
+	public ApiResult<Void> restore(
+		@PathVariable Long id
+	) {
+		productService.restore(id);
+
+		return ApiResult.ok();
+	}
 
 	//재고수량감소
 	@PutMapping("/{id}/decrease-stock")
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<Void> decreaseStock(
 		@PathVariable Long id,
-		@RequestBody @Valid ProductUpdateReqeust request
+		long stockQuantity
 	) {
-		productService.decreaseStock(id, request.stockQuantity());
+		productService.decreaseStock(id, stockQuantity);
 
 		return ApiResult.ok();
 	}
@@ -139,9 +169,9 @@ public class ProductController extends SwaggerAssistance {
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResult<Void> increaseStock(
 		@PathVariable Long id,
-		@RequestBody @Valid ProductUpdateReqeust request
+		long stockQuantity
 	) {
-		productService.increaseStock(id, request.stockQuantity());
+		productService.increaseStock(id, stockQuantity);
 
 		return ApiResult.ok();
 	}

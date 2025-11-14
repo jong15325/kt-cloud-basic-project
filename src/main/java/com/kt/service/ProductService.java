@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.common.CustomException;
 import com.kt.common.ErrorCode;
+import com.kt.common.Preconditions;
 import com.kt.domain.product.Product;
 import com.kt.domain.product.ProductStatus;
 import com.kt.dto.product.ProductCreateReqeust;
@@ -36,6 +37,10 @@ public class ProductService {
 
 	private final ProductRepository productRepository;
 
+	/**
+	 * 상품 생성
+	 * @param request
+	 */
 	public void create(ProductCreateReqeust request) {
 		var newProduct = new Product(
 			request.name(),
@@ -49,6 +54,11 @@ public class ProductService {
 		productRepository.save(newProduct);
 	}
 
+	/**
+	 * 상품 수정
+	 * @param id
+	 * @param request
+	 */
 	public void update(Long id, ProductUpdateReqeust request) {
 		var product = productRepository.findById(id)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
@@ -60,6 +70,10 @@ public class ProductService {
 		);
 	}
 
+	/**
+	 * 상품 삭제
+	 * @param id
+	 */
 	public void delete(Long id) {
 		var product = productRepository.findById(id)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
@@ -67,77 +81,101 @@ public class ProductService {
 		productRepository.delete(product);
 	}
 
+	/**
+	 * 상품 검색
+	 * @param pageable
+	 * @param keyword
+	 * @return 키워드 및 page, size에 해당하는 상품 리스트 반환
+	 */
 	public Page<Product> search(Pageable pageable, String keyword) {
 		return productRepository.findAllByNameContaining(keyword, pageable);
 	}
 
+	/**
+	 * 상품 상세
+	 * @param id
+	 * @return
+	 */
 	public Product detail(Long id) {
 		return productRepository.findById(id)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 	}
 
-	public void changeStatus(Long id, ProductStatus status) {
+	/**
+	 * 상품 활성화
+	 * @param id
+	 */
+	public void active(Long id) {
 		var product = productRepository.findById(id)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
-		product.changeStatus(status);
+		product.active();
 	}
 
+	/**
+	 * 상품 비활성화
+	 * @param id
+	 */
+	public void inActive(Long id) {
+		var product = productRepository.findById(id)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
-	/*	public void adjusStockQuantity(Long productId, long quantity, String option) {
-			var product = productRepository.findById(productId)
-				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+		product.inActive();
+	}
 
-			var productStock = product.getStock();
+	/**
+	 * 상품 품절
+	 * @param id
+	 */
+	public void soldOut(Long id) {
+		var product = productRepository.findById(id)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
-			if(option.equals("increase")) {
-				productStock = productStock + quantity;
-			} else {
-				productStock = productStock - quantity;
+		product.soldOut();
+	}
 
-				if (productStock < quantity) {
-					productStock = 0;
-				}
+	/**
+	 * 상품 삭제(소프트)
+	 * @param id
+	 */
+	public void softDelete(Long id) {
+		var product = productRepository.findById(id)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
-			}
+		product.delete();
+	}
 
-			product.update(
-				product.getName(),
-				product.getPrice(),
-				productStock
-			);
-		}*/
+	public void restore(Long id) {
+		var product = productRepository.findById(id)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
+		product.restore();
+	}
+
+	/**
+	 * 재고 감소
+	 * @param productId
+	 * @param quantity
+	 */
 	public void decreaseStock(Long productId, long quantity) {
 		var product = productRepository.findById(productId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 
-
 		//TODO :
 		// 강사님 tip : 서비스에서 할건지, 도메인에서 할건지, DB에서 할건지 책임을 정하는데 지금의 나라면 도메인에서 할 것
-		var productStock = product.getStock();
 
-		if (productStock < quantity) {
-			productStock = 0;
-		} else {
-			productStock = productStock - quantity;
-		}
-
-		product.update(
-			product.getName(),
-			product.getPrice(),
-			productStock
-		);
+		product.decreaseStock(quantity);
 	}
 
+	/**
+	 * 재고 증가
+	 * @param productId
+	 * @param quantity
+	 */
 	public void increaseStock(Long productId, long quantity) {
 		var product = productRepository.findById(productId)
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
 
-		product.update(
-			product.getName(),
-			product.getPrice(),
-			product.getStock() + quantity
-		);
+		product.increaseStock(quantity);
 	}
 }
