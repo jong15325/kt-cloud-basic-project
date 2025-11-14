@@ -17,4 +17,39 @@ public class Preconditions {
 			throw new CustomException(errorCode);
 		}
 	}
+
+	/**
+	 * 양수 검증
+	 * @param value
+	 * @param errorCode
+	 */
+	public static void checkPositive(long value, ErrorCode errorCode) {
+		if (value <= 0) {
+			throw new CustomException(errorCode);
+		}
+	}
+
+	/**
+	 * 최소값 검증
+	 * @param value
+	 * @param min
+	 * @param errorCode
+	 */
+	public static void checkMinimum(long value, long min, ErrorCode errorCode) {
+		if (value < min) {
+			throw new CustomException(errorCode);
+		}
+	}
+
+	/**
+	 * 최대값 검증
+	 * @param value
+	 * @param max
+	 * @param errorCode
+	 */
+	public static void checkMaximum(long value, long max, ErrorCode errorCode) {
+		if (value > max) {
+			throw new CustomException(errorCode);
+		}
+	}
 }

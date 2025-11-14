@@ -22,11 +22,40 @@ public class SecurityConfiguration {
 	// bcrypt단방향해시암호화
 	// 평문은 5번 해싱해서 랜덤한 값을 저장함 -> 비교할때는 5번해싱해서 같은지를 비교
 
-	private static final String[] GET_PERMIT_ALL = {"/api/health/**"};
-	private static final String[] POST_PERMIT_ALL = {"/api/v1/public/**"};
-	private static final String[] PUT_PERMIT_ALL = {"/api/v1/public/**"};
-	private static final String[] PATCH_PERMIT_ALL = {"/api/v1/public/**"};
-	private static final String[] DELETE_PERMIT_ALL = {"/api/v1/public/**"};
+	private static final String[] GET_PERMIT_ALL = {
+		"/admin/users",
+		"/admin/orders/**",
+		"/products/**",
+		"/orders/**",
+		"/users/**",
+	};
+	private static final String[] POST_PERMIT_ALL = {
+		"/admin/users",
+		"/admin/orders/**",
+		"/products/**",
+		"/orders/**",
+		"/users/**",};
+	private static final String[] PUT_PERMIT_ALL = {
+		"/admin/users",
+		"/admin/orders/**",
+		"/products/**",
+		"/orders/**",
+		"/users/**",
+	};
+	private static final String[] PATCH_PERMIT_ALL = {
+		"/admin/users",
+		"/admin/orders/**",
+		"/products/**",
+		"/orders/**",
+		"/users/**",
+	};
+	private static final String[] DELETE_PERMIT_ALL = {
+		"/admin/users",
+		"/admin/orders/**",
+		"/products/**",
+		"/orders/**",
+		"/users/**",
+	};
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
